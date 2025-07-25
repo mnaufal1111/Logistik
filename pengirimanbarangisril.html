@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiExpress - Jasa Pengiriman Terpercaya</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .slide-in { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+        .bounce-in { animation: bounceIn 0.6s ease-out; }
+        @keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.05); } 70% { transform: scale(0.9); } 100% { transform: scale(1); opacity: 1; } }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shipping-fast text-2xl"></i>
+                    <span class="text-xl font-bold">LogiExpress</span>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#" onclick="showPage('home')" class="hover:text-blue-200 transition">Beranda</a>
+                    <a href="#" onclick="showPage('tracking')" class="hover:text-blue-200 transition">Lacak Paket</a>
+                    <a href="#" onclick="showPage('calculator')" class="hover:text-blue-200 transition">Hitung Ongkir</a>
+                    <a href="#" onclick="showPage('order')" class="hover:text-blue-200 transition">Pesan Kirim</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span id="userGreeting" class="hidden"></span>
+                    <button id="loginBtn" onclick="showPage('login')" class="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Masuk
+                    </button>
+                    <button id="logoutBtn" onclick="logout()" class="hidden bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Keluar
+                    </button>
+                    <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-blue-600 text-white">
+        <div class="px-4 py-2 space-y-2">
+            <a href="#" onclick="showPage('home')" class="block py-2 hover:bg-blue-700 rounded">Beranda</a>
+            <a href="#" onclick="showPage('tracking')" class="block py-2 hover:bg-blue-700 rounded">Lacak Paket</a>
+            <a href="#" onclick="showPage('calculator')" class="block py-2 hover:bg-blue-700 rounded">Hitung Ongkir</a>
+            <a href="#" onclick="showPage('order')" class="block py-2 hover:bg-blue-700 rounded">Pesan Kirim</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+        <!-- Home Page -->
+        <div id="homePage" class="page">
+            <!-- Hero Section -->
+            <section class="gradient-bg text-white py-20">
+                <div class="container mx-auto px-4 text-center">
+                    <h1 class="text-5xl font-bold mb-6 fade-in">Pengiriman Cepat & Terpercaya</h1>
+                    <p class="text-xl mb-8 fade-in">Kirim paket Anda ke seluruh Indonesia dengan aman dan tepat waktu</p>
+                    <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                        <button onclick="showPage('tracking')" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition bounce-in">
+                            <i class="fas fa-search mr-2"></i>Lacak Paket
+                        </button>
+                        <button onclick="showPage('order')" class="bg-yellow-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-yellow-600 transition bounce-in">
+                            <i class="fas fa-plus mr-2"></i>Kirim Sekarang
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="py-16">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center mb-12">Mengapa Pilih LogiExpress?</h2>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="text-center p-6 bg-white rounded-lg shadow-lg card-hover">
+                            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-bolt text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Pengiriman Cepat</h3>
+                            <p class="text-gray-600">Layanan express dengan jaminan sampai hari yang sama untuk area tertentu</p>
+                        </div>
+                        <div class="text-center p-6 bg-white rounded-lg shadow-lg card-hover">
+                            <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Aman & Terpercaya</h3>
+                            <p class="text-gray-600">Paket Anda diasuransikan dan dilacak secara real-time</p>
+                        </div>
+                        <div class="text-center p-6 bg-white rounded-lg shadow-lg card-hover">
+                            <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-money-bill-wave text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">Harga Terjangkau</h3>
+                            <p class="text-gray-600">Tarif kompetitif dengan berbagai pilihan layanan sesuai kebutuhan</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section class="bg-gray-100 py-16">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-3xl font-bold text-center mb-12">Layanan Kami</h2>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
+                            <i class="fas fa-truck text-blue-600 text-3xl mb-4"></i>
+                            <h3 class="font-semibold mb-2">Reguler</h3>
+                            <p class="text-sm text-gray-600">2-3 hari kerja</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
+                            <i class="fas fa-rocket text-green-600 text-3xl mb-4"></i>
+                            <h3 class="font-semibold mb-2">Express</h3>
+                            <p class="text-sm text-gray-600">1-2 hari kerja</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
+                            <i class="fas fa-clock text-yellow-600 text-3xl mb-4"></i>
+                            <h3 class="font-semibold mb-2">Same Day</h3>
+                            <p class="text-sm text-gray-600">Hari yang sama</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg text-center card-hover">
+                            <i class="fas fa-box text-purple-600 text-3xl mb-4"></i>
+                            <h3 class="font-semibold mb-2">Cargo</h3>
+                            <p class="text-sm text-gray-600">Barang besar</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Login Page -->
+        <div id="loginPage" class="page hidden">
+            <div class="min-h-screen flex items-center justify-center py-12 px-4">
+                <div class="max-w-md w-full space-y-8">
+                    <div class="text-center">
+                        <h2 class="text-3xl font-bold text-gray-900">Masuk ke Akun Anda</h2>
+                        <p class="mt-2 text-gray-600">Atau <a href="#" onclick="showPage('register')" class="text-blue-600 hover:text-blue-500">daftar akun baru</a></p>
+                    </div>
+                    <form class="mt-8 space-y-6 bg-white p-8 rounded-lg shadow-lg" onsubmit="login(event)">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="loginEmail" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan email Anda">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                            <input type="password" id="loginPassword" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan password Anda">
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition font-semibold">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Masuk
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Page -->
+        <div id="registerPage" class="page hidden">
+            <div class="min-h-screen flex items-center justify-center py-12 px-4">
+                <div class="max-w-md w-full space-y-8">
+                    <div class="text-center">
+                        <h2 class="text-3xl font-bold text-gray-900">Daftar Akun Baru</h2>
+                        <p class="mt-2 text-gray-600">Sudah punya akun? <a href="#" onclick="showPage('login')" class="text-blue-600 hover:text-blue-500">Masuk di sini</a></p>
+                    </div>
+                    <form class="mt-8 space-y-6 bg-white p-8 rounded-lg shadow-lg" onsubmit="register(event)">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                            <input type="text" id="registerName" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama lengkap">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="registerEmail" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan email">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nomor Telepon</label>
+                            <input type="tel" id="registerPhone" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nomor telepon">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                            <input type="password" id="registerPassword" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan password">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Konfirmasi Password</label>
+                            <input type="password" id="registerConfirmPassword" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Konfirmasi password">
+                        </div>
+                        <button type="submit" class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition font-semibold">
+                            <i class="fas fa-user-plus mr-2"></i>Daftar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tracking Page -->
+        <div id="trackingPage" class="page hidden">
+            <div class="container mx-auto px-4 py-12">
+                <div class="max-w-2xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8">Lacak Paket Anda</h2>
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <form onsubmit="trackPackage(event)" class="mb-8">
+                            <div class="flex flex-col md:flex-row gap-4">
+                                <input type="text" id="trackingNumber" required class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nomor resi (contoh: LE001234567)">
+                                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                                    <i class="fas fa-search mr-2"></i>Lacak
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div id="trackingResult" class="hidden">
+                            <div class="border-t pt-6">
+                                <h3 class="text-xl font-semibold mb-4">Status Pengiriman</h3>
+                                <div id="trackingInfo" class="space-y-4"></div>
+                                <div id="trackingTimeline" class="mt-8"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Page -->
+        <div id="calculatorPage" class="page hidden">
+            <div class="container mx-auto px-4 py-12">
+                <div class="max-w-2xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8">Kalkulator Ongkos Kirim</h2>
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <form onsubmit="calculateShipping(event)" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Kota Asal</label>
+                                    <select id="originCity" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="">Pilih kota asal</option>
+                                        <option value="jakarta">Jakarta</option>
+                                        <option value="surabaya">Surabaya</option>
+                                        <option value="bandung">Bandung</option>
+                                        <option value="medan">Medan</option>
+                                        <option value="semarang">Semarang</option>
+                                        <option value="makassar">Makassar</option>
+                                        <option value="palembang">Palembang</option>
+                                        <option value="tangerang">Tangerang</option>
+                                        <option value="bekasi">Bekasi</option>
+                                        <option value="depok">Depok</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Kota Tujuan</label>
+                                    <select id="destinationCity" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option value="">Pilih kota tujuan</option>
+                                        <option value="jakarta">Jakarta</option>
+                                        <option value="surabaya">Surabaya</option>
+                                        <option value="bandung">Bandung</option>
+                                        <option value="medan">Medan</option>
+                                        <option value="semarang">Semarang</option>
+                                        <option value="makassar">Makassar</option>
+                                        <option value="palembang">Palembang</option>
+                                        <option value="tangerang">Tangerang</option>
+                                        <option value="bekasi">Bekasi</option>
+                                        <option value="depok">Depok</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Berat Paket (kg)</label>
+                                <input type="number" id="packageWeight" required min="0.1" step="0.1" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan berat paket">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Layanan</label>
+                                <select id="serviceType" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Pilih jenis layanan</option>
+                                    <option value="reguler">Reguler (2-3 hari)</option>
+                                    <option value="express">Express (1-2 hari)</option>
+                                    <option value="same-day">Same Day (Hari yang sama)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition font-semibold">
+                                <i class="fas fa-calculator mr-2"></i>Hitung Ongkir
+                            </button>
+                        </form>
+                        
+                        <div id="calculatorResult" class="hidden mt-8 p-6 bg-blue-50 rounded-lg">
+                            <h3 class="text-xl font-semibold mb-4">Hasil Perhitungan</h3>
+                            <div id="shippingCost" class="space-y-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Page -->
+        <div id="orderPage" class="page hidden">
+            <div class="container mx-auto px-4 py-12">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-8">Form Pemesanan Pengiriman</h2>
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <form onsubmit="submitOrder(event)" class="space-y-8">
+                            <!-- Pengirim -->
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4 text-blue-600">Data Pengirim</h3>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Pengirim</label>
+                                        <input type="text" id="senderName" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Nomor Telepon</label>
+                                        <input type="tel" id="senderPhone" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Alamat Pengirim</label>
+                                        <textarea id="senderAddress" required rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Penerima -->
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4 text-green-600">Data Penerima</h3>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Penerima</label>
+                                        <input type="text" id="receiverName" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Nomor Telepon</label>
+                                        <input type="tel" id="receiverPhone" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Alamat Penerima</label>
+                                        <textarea id="receiverAddress" required rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Detail Paket -->
+                            <div>
+                                <h3 class="text-xl font-semibold mb-4 text-purple-600">Detail Paket</h3>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Barang</label>
+                                        <input type="text" id="itemType" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: Elektronik, Pakaian, Dokumen">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Berat (kg)</label>
+                                        <input type="number" id="orderWeight" required min="0.1" step="0.1" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Nilai Barang (Rp)</label>
+                                        <input type="number" id="itemValue" required min="0" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Layanan</label>
+                                        <select id="orderServiceType" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            <option value="">Pilih jenis layanan</option>
+                                            <option value="reguler">Reguler (2-3 hari)</option>
+                                            <option value="express">Express (1-2 hari)</option>
+                                            <option value="same-day">Same Day (Hari yang sama)</option>
+                                        </select>
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Catatan Khusus</label>
+                                        <textarea id="specialNotes" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Catatan khusus untuk pengiriman (opsional)"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-center">
+                                <button type="submit" class="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-semibold text-lg">
+                                    <i class="fas fa-paper-plane mr-2"></i>Kirim Pesanan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div id="dashboardPage" class="page hidden">
+            <div class="container mx-auto px-4 py-12">
+                <h2 class="text-3xl font-bold mb-8">Dashboard Pengguna</h2>
+                
+                <!-- Stats Cards -->
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full">
+                                <i class="fas fa-box text-blue-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-600 text-sm">Total Pengiriman</p>
+                                <p class="text-2xl font-bold" id="totalShipments">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-600 text-sm">Terkirim</p>
+                                <p class="text-2xl font-bold" id="deliveredShipments">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="bg-yellow-100 p-3 rounded-full">
+                                <i class="fas fa-truck text-yellow-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-600 text-sm">Dalam Perjalanan</p>
+                                <p class="text-2xl font-bold" id="inTransitShipments">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="bg-purple-100 p-3 rounded-full">
+                                <i class="fas fa-clock text-purple-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-600 text-sm">Diproses</p>
+                                <p class="text-2xl font-bold" id="processingShipments">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Shipments -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold mb-6">Riwayat Pengiriman Terbaru</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b">
+                                    <th class="text-left py-3 px-4">No. Resi</th>
+                                    <th class="text-left py-3 px-4">Penerima</th>
+                                    <th class="text-left py-3 px-4">Tujuan</th>
+                                    <th class="text-left py-3 px-4">Status</th>
+                                    <th class="text-left py-3 px-4">Tanggal</th>
+                                    <th class="text-left py-3 px-4">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shipmentHistory">
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="adminPage" class="page hidden">
+            <div class="container mx-auto px-4 py-12">
+                <h2 class="text-3xl font-bold mb-8">Dashboard Admin</h2>
+                
+                <!-- Admin Stats -->
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-full">
+                                <i class="fas fa-users text-blue-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-600 text-sm">Total Pengguna</p>
+                                <p class="text-2xl font-bold" id="totalUsers">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <i class="fas fa-box text-green-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-600 text-sm">Total Pengiriman</p>
+                                <p class="text-2xl font-bold" id="adminTotalShipments">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="bg-yellow-100 p-3 rounded-full">
+                                <i class="fas fa-money-bill-wave text-yellow-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-600 text-sm">Pendapatan</p>
+                                <p class="text-2xl font-bold" id="totalRevenue">Rp 0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="bg-red-100 p-3 rounded-full">
+                                <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-gray-600 text-sm">Perlu Perhatian</p>
+                                <p class="text-2xl font-bold" id="alertCount">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Tabs -->
+                <div class="bg-white rounded-lg shadow-lg">
+                    <div class="border-b">
+                        <nav class="flex space-x-8 px-6">
+                            <button onclick="showAdminTab('shipments')" class="admin-tab-btn py-4 px-2 border-b-2 border-blue-500 text-blue-600 font-medium">
+                                Kelola Pengiriman
+                            </button>
+                            <button onclick="showAdminTab('users')" class="admin-tab-btn py-4 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700">
+                                Kelola Pengguna
+                            </button>
+                            <button onclick="showAdminTab('reports')" class="admin-tab-btn py-4 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700">
+                                Laporan
+                            </button>
+                        </nav>
+                    </div>
+
+                    <!-- Shipments Tab -->
+                    <div id="adminShipmentsTab" class="admin-tab-content p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-semibold">Kelola Pengiriman</h3>
+                            <div class="flex space-x-4">
+                                <select id="statusFilter" class="px-3 py-2 border border-gray-300 rounded-lg" onchange="filterShipments()">
+                                    <option value="">Semua Status</option>
+                                    <option value="diproses">Diproses</option>
+                                    <option value="dikirim">Dikirim</option>
+                                    <option value="dalam-perjalanan">Dalam Perjalanan</option>
+                                    <option value="terkirim">Terkirim</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="text-left py-3 px-4">No. Resi</th>
+                                        <th class="text-left py-3 px-4">Pengirim</th>
+                                        <th class="text-left py-3 px-4">Penerima</th>
+                                        <th class="text-left py-3 px-4">Status</th>
+                                        <th class="text-left py-3 px-4">Tanggal</th>
+                                        <th class="text-left py-3 px-4">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminShipmentList">
+                                    <!-- Data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Users Tab -->
+                    <div id="adminUsersTab" class="admin-tab-content p-6 hidden">
+                        <h3 class="text-xl font-semibold mb-6">Kelola Pengguna</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="text-left py-3 px-4">Nama</th>
+                                        <th class="text-left py-3 px-4">Email</th>
+                                        <th class="text-left py-3 px-4">Telepon</th>
+                                        <th class="text-left py-3 px-4">Bergabung</th>
+                                        <th class="text-left py-3 px-4">Status</th>
+                                        <th class="text-left py-3 px-4">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminUserList">
+                                    <!-- Data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Reports Tab -->
+                    <div id="adminReportsTab" class="admin-tab-content p-6 hidden">
+                        <h3 class="text-xl font-semibold mb-6">Laporan</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <h4 class="font-semibold mb-4">Laporan Pengiriman Bulanan</h4>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span>Total Pengiriman:</span>
+                                        <span class="font-semibold" id="monthlyShipments">0</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Pendapatan:</span>
+                                        <span class="font-semibold" id="monthlyRevenue">Rp 0</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Rata-rata per hari:</span>
+                                        <span class="font-semibold" id="dailyAverage">0</span>
+                                    </div>
+                                </div>
+                                <button class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                    <i class="fas fa-download mr-2"></i>Export PDF
+                                </button>
+                            </div>
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <h4 class="font-semibold mb-4">Laporan Performa Layanan</h4>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span>Reguler:</span>
+                                        <span class="font-semibold" id="regularCount">0</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Express:</span>
+                                        <span class="font-semibold" id="expressCount">0</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Same Day:</span>
+                                        <span class="font-semibold" id="sameDayCount">0</span>
+                                    </div>
+                                </div>
+                                <button class="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                                    <i class="fas fa-download mr-2"></i>Export Excel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-shipping-fast text-2xl"></i>
+                        <span class="text-xl font-bold">LogiExpress</span>
+                    </div>
+                    <p class="text-gray-400">Solusi pengiriman terpercaya untuk kebutuhan logistik Anda di seluruh Indonesia.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Layanan</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Pengiriman Reguler</a></li>
+                        <li><a href="#" class="hover:text-white transition">Express Delivery</a></li>
+                        <li><a href="#" class="hover:text-white transition">Same Day Service</a></li>
+                        <li><a href="#" class="hover:text-white transition">Cargo Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Bantuan</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition">Cara Pengiriman</a></li>
+                        <li><a href="#" class="hover:text-white transition">Kebijakan Privasi</a></li>
+                        <li><a href="#" class="hover:text-white transition">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Kontak</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-phone mr-2"></i>0800-1234-5678</li>
+                        <li><i class="fas fa-envelope mr-2"></i>info@logiexpress.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 LogiExpress. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="toastMessage">Berhasil!</span>
+        </div>
+    </div>
+
+    <!-- Status Update Modal -->
+    <div id="statusModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <h3 class="text-lg font-semibold mb-4">Update Status Pengiriman</h3>
+            <form onsubmit="updateShipmentStatus(event)">
+                <input type="hidden" id="modalTrackingNumber">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Status Baru</label>
+                    <select id="newStatus" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="diproses">Diproses</option>
+                        <option value="dikirim">Dikirim</option>
+                        <option value="dalam-perjalanan">Dalam Perjalanan</option>
+                        <option value="terkirim">Terkirim</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Lokasi</label>
+                    <input type="text" id="newLocation" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan lokasi saat ini">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Catatan</label>
+                    <textarea id="statusNote" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Catatan tambahan (opsional)"></textarea>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="closeStatusModal()" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                        Update Status
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let users = JSON.parse(localStorage.getItem('logiUsers') || '[]');
+        let shipments = JSON.parse(localStorage.getItem('logiShipments') || '[]');
+        let trackingCounter = parseInt(localStorage.getItem('trackingCounter') || '1000000');
+
+        // Sample data initialization
+        function initializeSampleData() {
+            if (users.length === 0) {
+                // Add sample admin user
+                users.push({
+                    id: 1,
+                    name: 'Admin LogiExpress',
+                    email: 'admin@logiexpress.com',
+                    phone: '08123456789',
+                    password: 'admin123',
+                    role: 'admin',
+                    joinDate: new Date().toISOString()
+                });
+
+                // Add sample regular user
+                users.push({
+                    id: 2,
+                    name: 'John Doe',
+                    email: 'john@example.com',
+                    phone: '08987654321',
+                    password: 'user123',
+                    role: 'user',
+                    joinDate: new Date().toISOString()
+                });
+
+                localStorage.setItem('logiUsers', JSON.stringify(users));
+            }
+
+            if (shipments.length === 0) {
+                // Add sample shipments
+                const sampleShipments = [
+                    {
+                        trackingNumber: 'LE001234567',
+                        userId: 2,
+                        senderName: 'John Doe',
+                        senderPhone: '08987654321',
+                        senderAddress: 'Jl. Sudirman No. 123, Jakarta',
+                        receiverName: 'Jane Smith',
+                        receiverPhone: '08123456789',
+                        receiverAddress: 'Jl. Malioboro No. 456, Yogyakarta',
+                        itemType: 'Elektronik',
+                        weight: 2.5,
+                        itemValue: 5000000,
+                        serviceType: 'express',
+                        specialNotes: 'Barang fragile, mohon hati-hati',
+                        status: 'dalam-perjalanan',
+                        currentLocation: 'Semarang Hub',
+                        orderDate: new Date(Date.now() - 86400000).toISOString(),
+                        estimatedDelivery: new Date(Date.now() + 86400000).toISOString(),
+                        cost: 75000,
+                        timeline: [
+                            { status: 'diproses', location: 'Jakarta Hub', timestamp: new Date(Date.now() - 86400000).toISOString(), note: 'Paket diterima dan sedang diproses' },
+                            { status: 'dikirim', location: 'Jakarta Hub', timestamp: new Date(Date.now() - 43200000).toISOString(), note: 'Paket telah dikirim dari Jakarta' },
+                            { status: 'dalam-perjalanan', location: 'Semarang Hub', timestamp: new Date(Date.now() - 21600000).toISOString(), note: 'Paket sedang dalam perjalanan' }
+                        ]
+                    },
+                    {
+                        trackingNumber: 'LE001234568',
+                        userId: 2,
+                        senderName: 'John Doe',
+                        senderPhone: '08987654321',
+                        senderAddress: 'Jl. Sudirman No. 123, Jakarta',
+                        receiverName: 'Bob Wilson',
+                        receiverPhone: '08555666777',
+                        receiverAddress: 'Jl. Braga No. 789, Bandung',
+                        itemType: 'Dokumen',
+                        weight: 0.5,
+                        itemValue: 100000,
+                        serviceType: 'same-day',
+                        specialNotes: '',
+                        status: 'terkirim',
+                        currentLocation: 'Bandung Hub',
+                        orderDate: new Date(Date.now() - 172800000).toISOString(),
+                        estimatedDelivery: new Date(Date.now() - 172800000).toISOString(),
+                        cost: 50000,
+                        timeline: [
+                            { status: 'diproses', location: 'Jakarta Hub', timestamp: new Date(Date.now() - 172800000).toISOString(), note: 'Paket diterima dan sedang diproses' },
+                            { status: 'dikirim', location: 'Jakarta Hub', timestamp: new Date(Date.now() - 172700000).toISOString(), note: 'Paket telah dikirim dari Jakarta' },
+                            { status: 'dalam-perjalanan', location: 'Bandung Hub', timestamp: new Date(Date.now() - 172600000).toISOString(), note: 'Paket sedang dalam perjalanan' },
+                            { status: 'terkirim', location: 'Bandung Hub', timestamp: new Date(Date.now() - 172500000).toISOString(), note: 'Paket telah diterima oleh penerima' }
+                        ]
+                    }
+                ];
+
+                shipments.push(...sampleShipments);
+                localStorage.setItem('logiShipments', JSON.stringify(shipments));
+            }
+        }
+
+        // Initialize sample data on page load
+        initializeSampleData();
+
+        // Check if user is logged in
+        function checkAuth() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateAuthUI();
+                if (currentUser.role === 'admin') {
+                    // Add admin menu item
+                    const nav = document.querySelector('nav .hidden.md\\:flex');
+                    if (!document.querySelector('#adminNavLink')) {
+                        const adminLink = document.createElement('a');
+                        adminLink.id = 'adminNavLink';
+                        adminLink.href = '#';
+                        adminLink.onclick = () => showPage('admin');
+                        adminLink.className = 'hover:text-blue-200 transition';
+                        adminLink.innerHTML = '<i class="fas fa-cog mr-1"></i>Admin';
+                        nav.appendChild(adminLink);
+                    }
+                }
+            }
+        }
+
+        // Update authentication UI
+        function updateAuthUI() {
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const userGreeting = document.getElementById('userGreeting');
+
+            if (currentUser) {
+                loginBtn.classList.add('hidden');
+                logoutBtn.classList.remove('hidden');
+                userGreeting.classList.remove('hidden');
+                userGreeting.textContent = `Halo, ${currentUser.name}`;
+                
+                // Add dashboard link to navigation
+                const nav = document.querySelector('nav .hidden.md\\:flex');
+                if (!document.querySelector('#dashboardNavLink')) {
+                    const dashboardLink = document.createElement('a');
+                    dashboardLink.id = 'dashboardNavLink';
+                    dashboardLink.href = '#';
+                    dashboardLink.onclick = () => showPage('dashboard');
+                    dashboardLink.className = 'hover:text-blue-200 transition';
+                    dashboardLink.innerHTML = '<i class="fas fa-tachometer-alt mr-1"></i>Dashboard';
+                    nav.insertBefore(dashboardLink, nav.children[nav.children.length - 1]);
+                }
+            } else {
+                loginBtn.classList.remove('hidden');
+                logoutBtn.classList.add('hidden');
+                userGreeting.classList.add('hidden');
+                
+                // Remove dashboard and admin links
+                const dashboardLink = document.querySelector('#dashboardNavLink');
+                const adminLink = document.querySelector('#adminNavLink');
+                if (dashboardLink) dashboardLink.remove();
+                if (adminLink) adminLink.remove();
+            }
+        }
+
+        // Show page function
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            // Show selected page
+            const targetPage = document.getElementById(pageName + 'Page');
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                targetPage.classList.add('fade-in');
+            }
+
+            // Load page-specific data
+            if (pageName === 'dashboard' && currentUser) {
+                loadDashboardData();
+            } else if (pageName === 'admin' && currentUser && currentUser.role === 'admin') {
+                loadAdminData();
+            } else if (pageName === 'dashboard' && !currentUser) {
+                showPage('login');
+                showToast('Silakan login terlebih dahulu', 'error');
+            } else if (pageName === 'admin' && (!currentUser || currentUser.role !== 'admin')) {
+                showPage('home');
+                showToast('Akses ditolak', 'error');
+            }
+
+            // Close mobile menu
+            document.getElementById('mobileMenu').classList.add('hidden');
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Login function
+        function login(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                updateAuthUI();
+                showToast('Login berhasil!');
+                showPage('dashboard');
+            } else {
+                showToast('Email atau password salah', 'error');
+            }
+        }
+
+        // Register function
+        function register(event) {
+            event.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const phone = document.getElementById('registerPhone').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+            // Validation
+            if (password !== confirmPassword) {
+                showToast('Password tidak cocok', 'error');
+                return;
+            }
+
+            if (users.find(u => u.email === email)) {
+                showToast('Email sudah terdaftar', 'error');
+                return;
+            }
+
+            // Create new user
+            const newUser = {
+                id: users.length + 1,
+                name,
+                email,
+                phone,
+                password,
+                role: 'user',
+                joinDate: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            localStorage.setItem('logiUsers', JSON.stringify(users));
+            
+            showToast('Registrasi berhasil! Silakan login.');
+            showPage('login');
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateAuthUI();
+            showToast('Logout berhasil');
+            showPage('home');
+        }
+
+        // Track package function
+        function trackPackage(event) {
+            event.preventDefault();
+            const trackingNumber = document.getElementById('trackingNumber').value.toUpperCase();
+            
+            const shipment = shipments.find(s => s.trackingNumber === trackingNumber);
+            
+            if (shipment) {
+                displayTrackingResult(shipment);
+            } else {
+                showToast('Nomor resi tidak ditemukan', 'error');
+                document.getElementById('trackingResult').classList.add('hidden');
+            }
+        }
+
+        // Display tracking result
+        function displayTrackingResult(shipment) {
+            const resultDiv = document.getElementById('trackingResult');
+            const infoDiv = document.getElementById('trackingInfo');
+            const timelineDiv = document.getElementById('trackingTimeline');
+
+            // Basic info
+            infoDiv.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-600">Nomor Resi</p>
+                        <p class="font-semibold">${shipment.trackingNumber}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Status</p>
+                        <p class="font-semibold ${getStatusColor(shipment.status)}">${getStatusText(shipment.status)}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Penerima</p>
+                        <p class="font-semibold">${shipment.receiverName}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Lokasi Terakhir</p>
+                        <p class="font-semibold">${shipment.currentLocation}</p>
+                    </div>
+                </div>
+            `;
+
+            // Timeline
+            let timelineHTML = '<h4 class="font-semibold mb-4">Riwayat Pengiriman</h4><div class="space-y-4">';
+            
+            shipment.timeline.forEach((item, index) => {
+                const isLatest = index === shipment.timeline.length - 1;
+                timelineHTML += `
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-4 h-4 rounded-full ${isLatest ? 'bg-blue-600' : 'bg-gray-400'}"></div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="font-semibold ${isLatest ? 'text-blue-600' : 'text-gray-900'}">${getStatusText(item.status)}</p>
+                                    <p class="text-sm text-gray-600">${item.location}</p>
+                                    <p class="text-sm text-gray-500">${item.note}</p>
+                                </div>
+                                <p class="text-sm text-gray-500">${formatDateTime(item.timestamp)}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            timelineHTML += '</div>';
+            timelineDiv.innerHTML = timelineHTML;
+
+            resultDiv.classList.remove('hidden');
+        }
+
+        // Calculate shipping cost
+        function calculateShipping(event) {
+            event.preventDefault();
+            const origin = document.getElementById('originCity').value;
+            const destination = document.getElementById('destinationCity').value;
+            const weight = parseFloat(document.getElementById('packageWeight').value);
+            const serviceType = document.getElementById('serviceType').value;
+
+            const cost = calculateShippingCost(origin, destination, weight, serviceType);
+            const estimatedDays = getEstimatedDelivery(serviceType);
+
+            document.getElementById('shippingCost').innerHTML = `
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Layanan:</span>
+                        <span class="font-semibold">${getServiceText(serviceType)}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Estimasi Waktu:</span>
+                        <span class="font-semibold">${estimatedDays}</span>
+                    </div>
+                    <div class="flex justify-between items-center text-lg">
+                        <span class="text-gray-600">Total Ongkir:</span>
+                        <span class="font-bold text-green-600">Rp ${cost.toLocaleString('id-ID')}</span>
+                    </div>
+                    <button onclick="showPage('order')" class="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-paper-plane mr-2"></i>Pesan Sekarang
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('calculatorResult').classList.remove('hidden');
+        }
+
+        // Submit order
+        function submitOrder(event) {
+            event.preventDefault();
+            
+            if (!currentUser) {
+                showToast('Silakan login terlebih dahulu', 'error');
+                showPage('login');
+                return;
+            }
+
+            // Generate tracking number
+            trackingCounter++;
+            const trackingNumber = `LE${trackingCounter.toString().padStart(9, '0')}`;
+            
+            // Get form data
+            const orderData = {
+                trackingNumber,
+                userId: currentUser.id,
+                senderName: document.getElementById('senderName').value,
+                senderPhone: document.getElementById('senderPhone').value,
+                senderAddress: document.getElementById('senderAddress').value,
+                receiverName: document.getElementById('receiverName').value,
+                receiverPhone: document.getElementById('receiverPhone').value,
+                receiverAddress: document.getElementById('receiverAddress').value,
+                itemType: document.getElementById('itemType').value,
+                weight: parseFloat(document.getElementById('orderWeight').value),
+                itemValue: parseInt(document.getElementById('itemValue').value),
+                serviceType: document.getElementById('orderServiceType').value,
+                specialNotes: document.getElementById('specialNotes').value,
+                status: 'diproses',
+                currentLocation: 'Processing Center',
+                orderDate: new Date().toISOString(),
+                estimatedDelivery: getEstimatedDeliveryDate(document.getElementById('orderServiceType').value),
+                cost: calculateShippingCost('jakarta', 'surabaya', parseFloat(document.getElementById('orderWeight').value), document.getElementById('orderServiceType').value),
+                timeline: [{
+                    status: 'diproses',
+                    location: 'Processing Center',
+                    timestamp: new Date().toISOString(),
+                    note: 'Pesanan diterima dan sedang diproses'
+                }]
+            };
+
+            // Save to shipments
+            shipments.push(orderData);
+            localStorage.setItem('logiShipments', JSON.stringify(shipments));
+            localStorage.setItem('trackingCounter', trackingCounter.toString());
+
+            // Show success message
+            showToast(`Pesanan berhasil dibuat! Nomor resi: ${trackingNumber}`);
+            
+            // Reset form
+            event.target.reset();
+            
+            // Redirect to tracking
+            document.getElementById('trackingNumber').value = trackingNumber;
+            showPage('tracking');
+            trackPackage({ preventDefault: () => {} });
+        }
+
+        // Load dashboard data
+        function loadDashboardData() {
+            if (!currentUser) return;
+
+            const userShipments = shipments.filter(s => s.userId === currentUser.id);
+            
+            // Update stats
+            document.getElementById('totalShipments').textContent = userShipments.length;
+            document.getElementById('deliveredShipments').textContent = userShipments.filter(s => s.status === 'terkirim').length;
+            document.getElementById('inTransitShipments').textContent = userShipments.filter(s => s.status === 'dalam-perjalanan').length;
+            document.getElementById('processingShipments').textContent = userShipments.filter(s => s.status === 'diproses').length;
+
+            // Load shipment history
+            const historyHTML = userShipments.slice(-10).reverse().map(shipment => `
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="py-3 px-4 font-mono text-sm">${shipment.trackingNumber}</td>
+                    <td class="py-3 px-4">${shipment.receiverName}</td>
+                    <td class="py-3 px-4">${shipment.receiverAddress.split(',').pop().trim()}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-1 rounded-full text-xs font-semibold ${getStatusBadgeColor(shipment.status)}">
+                            ${getStatusText(shipment.status)}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-sm">${formatDate(shipment.orderDate)}</td>
+                    <td class="py-3 px-4">
+                        <button onclick="trackSpecificPackage('${shipment.trackingNumber}')" class="text-blue-600 hover:text-blue-800 text-sm">
+                            <i class="fas fa-search mr-1"></i>Lacak
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+
+            document.getElementById('shipmentHistory').innerHTML = historyHTML || '<tr><td colspan="6" class="py-8 text-center text-gray-500">Belum ada riwayat pengiriman</td></tr>';
+        }
+
+        // Load admin data
+        function loadAdminData() {
+            if (!currentUser || currentUser.role !== 'admin') return;
+
+            // Update admin stats
+            document.getElementById('totalUsers').textContent = users.filter(u => u.role === 'user').length;
+            document.getElementById('adminTotalShipments').textContent = shipments.length;
+            
+            const totalRevenue = shipments.reduce((sum, s) => sum + (s.cost || 0), 0);
+            document.getElementById('totalRevenue').textContent = `Rp ${totalRevenue.toLocaleString('id-ID')}`;
+            
+            const alertCount = shipments.filter(s => s.status === 'diproses' && 
+                new Date() - new Date(s.orderDate) > 24 * 60 * 60 * 1000).length;
+            document.getElementById('alertCount').textContent = alertCount;
+
+            // Load shipments for admin
+            loadAdminShipments();
+            loadAdminUsers();
+            loadAdminReports();
+        }
+
+        // Load admin shipments
+        function loadAdminShipments() {
+            const shipmentsHTML = shipments.slice().reverse().map(shipment => `
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="py-3 px-4 font-mono text-sm">${shipment.trackingNumber}</td>
+                    <td class="py-3 px-4">${shipment.senderName}</td>
+                    <td class="py-3 px-4">${shipment.receiverName}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-1 rounded-full text-xs font-semibold ${getStatusBadgeColor(shipment.status)}">
+                            ${getStatusText(shipment.status)}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-sm">${formatDate(shipment.orderDate)}</td>
+                    <td class="py-3 px-4">
+                        <button onclick="openStatusModal('${shipment.trackingNumber}')" class="text-blue-600 hover:text-blue-800 text-sm mr-2">
+                            <i class="fas fa-edit mr-1"></i>Update
+                        </button>
+                        <button onclick="trackSpecificPackage('${shipment.trackingNumber}')" class="text-green-600 hover:text-green-800 text-sm">
+                            <i class="fas fa-search mr-1"></i>Detail
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+
+            document.getElementById('adminShipmentList').innerHTML = shipmentsHTML || '<tr><td colspan="6" class="py-8 text-center text-gray-500">Belum ada data pengiriman</td></tr>';
+        }
+
+        // Load admin users
+        function loadAdminUsers() {
+            const usersHTML = users.filter(u => u.role === 'user').map(user => `
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="py-3 px-4">${user.name}</td>
+                    <td class="py-3 px-4">${user.email}</td>
+                    <td class="py-3 px-4">${user.phone}</td>
+                    <td class="py-3 px-4 text-sm">${formatDate(user.joinDate)}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                            Aktif
+                        </span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <button class="text-blue-600 hover:text-blue-800 text-sm mr-2">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                        <button class="text-red-600 hover:text-red-800 text-sm">
+                            <i class="fas fa-ban mr-1"></i>Suspend
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+
+            document.getElementById('adminUserList').innerHTML = usersHTML || '<tr><td colspan="6" class="py-8 text-center text-gray-500">Belum ada data pengguna</td></tr>';
+        }
+
+        // Load admin reports
+        function loadAdminReports() {
+            const currentMonth = new Date().getMonth();
+            const currentYear = new Date().getFullYear();
+            
+            const monthlyShipments = shipments.filter(s => {
+                const shipmentDate = new Date(s.orderDate);
+                return shipmentDate.getMonth() === currentMonth && shipmentDate.getFullYear() === currentYear;
+            });
+
+            document.getElementById('monthlyShipments').textContent = monthlyShipments.length;
+            
+            const monthlyRevenue = monthlyShipments.reduce((sum, s) => sum + (s.cost || 0), 0);
+            document.getElementById('monthlyRevenue').textContent = `Rp ${monthlyRevenue.toLocaleString('id-ID')}`;
+            
+            const dailyAverage = Math.round(monthlyShipments.length / new Date().getDate());
+            document.getElementById('dailyAverage').textContent = dailyAverage;
+
+            // Service performance
+            document.getElementById('regularCount').textContent = shipments.filter(s => s.serviceType === 'reguler').length;
+            document.getElementById('expressCount').textContent = shipments.filter(s => s.serviceType === 'express').length;
+            document.getElementById('sameDayCount').textContent = shipments.filter(s => s.serviceType === 'same-day').length;
+        }
+
+        // Show admin tab
+        function showAdminTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.admin-tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.classList.remove('border-blue-500', 'text-blue-600');
+                btn.classList.add('border-transparent', 'text-gray-500');
+            });
+
+            // Show selected tab
+            document.getElementById(`admin${tabName.charAt(0).toUpperCase() + tabName.slice(1)}Tab`).classList.remove('hidden');
+
+            // Add active class to selected tab button
+            event.target.classList.remove('border-transparent', 'text-gray-500');
+            event.target.classList.add('border-blue-500', 'text-blue-600');
+        }
+
+        // Open status modal
+        function openStatusModal(trackingNumber) {
+            document.getElementById('modalTrackingNumber').value = trackingNumber;
+            document.getElementById('statusModal').classList.remove('hidden');
+            document.getElementById('statusModal').classList.add('flex');
+        }
+
+        // Close status modal
+        function closeStatusModal() {
+            document.getElementById('statusModal').classList.add('hidden');
+            document.getElementById('statusModal').classList.remove('flex');
+        }
+
+        // Update shipment status
+        function updateShipmentStatus(event) {
+            event.preventDefault();
+            
+            const trackingNumber = document.getElementById('modalTrackingNumber').value;
+            const newStatus = document.getElementById('newStatus').value;
+            const newLocation = document.getElementById('newLocation').value;
+            const statusNote = document.getElementById('statusNote').value;
+
+            const shipmentIndex = shipments.findIndex(s => s.trackingNumber === trackingNumber);
+            
+            if (shipmentIndex !== -1) {
+                shipments[shipmentIndex].status = newStatus;
+                shipments[shipmentIndex].currentLocation = newLocation;
+                
+                // Add to timeline
+                shipments[shipmentIndex].timeline.push({
+                    status: newStatus,
+                    location: newLocation,
+                    timestamp: new Date().toISOString(),
+                    note: statusNote || `Status diperbarui menjadi ${getStatusText(newStatus)}`
+                });
+
+                localStorage.setItem('logiShipments', JSON.stringify(shipments));
+                
+                showToast('Status berhasil diperbarui');
+                closeStatusModal();
+                loadAdminShipments();
+            }
+        }
+
+        // Filter shipments
+        function filterShipments() {
+            const filter = document.getElementById('statusFilter').value;
+            const rows = document.querySelectorAll('#adminShipmentList tr');
+            
+            rows.forEach(row => {
+                if (filter === '') {
+                    row.style.display = '';
+                } else {
+                    const statusCell = row.querySelector('td:nth-child(4)');
+                    if (statusCell) {
+                        const statusText = statusCell.textContent.toLowerCase();
+                        const filterText = getStatusText(filter).toLowerCase();
+                        row.style.display = statusText.includes(filterText) ? '' : 'none';
+                    }
+                }
+            });
+        }
+
+        // Track specific package
+        function trackSpecificPackage(trackingNumber) {
+            document.getElementById('trackingNumber').value = trackingNumber;
+            showPage('tracking');
+            trackPackage({ preventDefault: () => {} });
+        }
+
+        // Utility functions
+        function calculateShippingCost(origin, destination, weight, serviceType) {
+            const baseRate = {
+                'reguler': 8000,
+                'express': 12000,
+                'same-day': 20000
+            };
+
+            const distanceMultiplier = origin === destination ? 1 : 1.5;
+            const weightMultiplier = Math.ceil(weight);
+            
+            return baseRate[serviceType] * distanceMultiplier * weightMultiplier;
+        }
+
+        function getEstimatedDelivery(serviceType) {
+            const estimates = {
+                'reguler': '2-3 hari kerja',
+                'express': '1-2 hari kerja',
+                'same-day': 'Hari yang sama'
+            };
+            return estimates[serviceType] || '2-3 hari kerja';
+        }
+
+        function getEstimatedDeliveryDate(serviceType) {
+            const days = {
+                'reguler': 3,
+                'express': 2,
+                'same-day': 0
+            };
+            
+            const deliveryDate = new Date();
+            deliveryDate.setDate(deliveryDate.getDate() + (days[serviceType] || 3));
+            return deliveryDate.toISOString();
+        }
+
+        function getStatusText(status) {
+            const statusTexts = {
+                'diproses': 'Diproses',
+                'dikirim': 'Dikirim',
+                'dalam-perjalanan': 'Dalam Perjalanan',
+                'terkirim': 'Terkirim'
+            };
+            return statusTexts[status] || status;
+        }
+
+        function getStatusColor(status) {
+            const colors = {
+                'diproses': 'text-yellow-600',
+                'dikirim': 'text-blue-600',
+                'dalam-perjalanan': 'text-purple-600',
+                'terkirim': 'text-green-600'
+            };
+            return colors[status] || 'text-gray-600';
+        }
+
+        function getStatusBadgeColor(status) {
+            const colors = {
+                'diproses': 'bg-yellow-100 text-yellow-800',
+                'dikirim': 'bg-blue-100 text-blue-800',
+                'dalam-perjalanan': 'bg-purple-100 text-purple-800',
+                'terkirim': 'bg-green-100 text-green-800'
+            };
+            return colors[status] || 'bg-gray-100 text-gray-800';
+        }
+
+        function getServiceText(serviceType) {
+            const services = {
+                'reguler': 'Reguler (2-3 hari)',
+                'express': 'Express (1-2 hari)',
+                'same-day': 'Same Day (Hari yang sama)'
+            };
+            return services[serviceType] || serviceType;
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('id-ID', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        function formatDateTime(dateString) {
+            return new Date(dateString).toLocaleString('id-ID', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            
+            if (type === 'error') {
+                toast.className = toast.className.replace('bg-green-500', 'bg-red-500');
+            } else {
+                toast.className = toast.className.replace('bg-red-500', 'bg-green-500');
+            }
+            
+            toast.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            showPage('home');
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('statusModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeStatusModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9637e81e8382fd03',t:'MTc1MzIzOTQwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
